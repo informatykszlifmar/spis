@@ -1,0 +1,190 @@
+<!doctype html>
+<html lang="pl">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+    <!-- Bootstrap CSS -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="bootstrap-icons.css">
+    <link rel="stylesheet" href="css/main.css">
+    <!-- <script src="js/jquery-3.6.0.min.js"></script> -->
+    <title>Inwentaryzacja 2021/2022</title>
+</head>
+
+<body>
+    <!-- Główny DIV -->
+    <div class="container-flex mx-auto responsive-font-example">
+        <!-- Okno wyników wyszukiwania -->
+        <div id="wyszukane" style="height: 200px" class="text-center overflow-auto border border-primary border-4 mx-3 mt-1 rounded-2">
+            <table class="table bordered table-responsive">
+                <th>Kod</th>
+                <th>Jednostka</th>
+                <th>Nazwa</th>
+                <th>EAN</th>
+                <th>Operacje</th>
+            </table>
+        </div>
+        <!-- Wyszukiwarka -->
+        <div class="mx-3 my-1 ">
+            <label for="exampleFormControlInput1" class="form-label ms-1 mt-1">Wprowadź poniżej kod kreskowy lub nr zapasu:</label>
+            <input type="text" class="form-control my-2  border border-success border-4" id="search_text" placeholder="od 5 do 7 lub 13 cyfr" inputmode="decimal" autocomplete="off">
+        </div>
+        <!-- Przyciski i okienka modalne dla przycisków -->
+        <div class="d-flex mx-3 my-1">
+            <!-- Button trigger modal -->
+            <button id="przycisk5" class="btn btn-primary w-50 mx-1" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop2"><i class="bi bi-gear mx-2"></i>Ustawienia</button>
+            <button id="przycisk7" class="btn btn-primary w-50 mx-1 disabled" type="button"><i class="bi bi-play-fill mx-2"></i>Zacznij</button>
+            <button id="przycisk4" class="btn btn-primary w-50 mx-1 disabled" type="button"><i class="bi bi-send mx-2"></i>Wyślij arkusz</button>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop2" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel">Wybierz login i lokację</h5>
+                            <!-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> -->
+                        </div>
+                        <div class="modal-body">
+                            <select id="Uzytkownik" class="form-select mt-1 mb-2" aria-label="Default select example">
+                                    <option selected>Login z Enov'y</option>
+                                    <option value="ADL">ADL</option>
+                                    <option value="ADS">ADS</option>
+                                    <option value="ANB">ANB</option>
+                                    <option value="ANK">ANK</option>
+                                    <option value="ANL">ANL</option>
+                                    <option value="ANS">ANS</option>
+                                    <option value="ARK">ARK</option>
+                                    <option value="BAB">BAB</option>
+                                    <option value="BAM">BAM</option>
+                                    <option value="DAM">DAM</option>
+                                    <option value="DAP">DAP</option>
+                                    <option value="EWJ">EWJ</option>
+                                    <option value="GRK">GRK</option>
+                                    <option value="JAK">JAK</option>
+                                    <option value="JAM">JAM</option>
+                                    <option value="JAS">JAS</option>
+                                    <option value="JCK">JCK</option>
+                                    <option value="JOW">JOW</option>
+                                    <option value="KRK">KRK</option>
+                                    <option value="KRM">KRM</option>
+                                    <option value="KRW">KRW</option>
+                                    <option value="KRP">KRP</option>
+                                    <option value="LEB">LEB</option>
+                                    <option value="LUN">LUN</option>
+                                    <option value="LUR">LUR</option>
+                                    <option value="RAW">RAW</option>
+                                    <option value="MAK">MAK</option>
+                                    <option value="MAN">MAN</option>
+                                    <option value="MAS">MAS</option>
+                                    <option value="MCK">MCK</option>
+                                    <option value="MIK">MIK</option>
+                                    <option value="PAD">PAD</option>
+                                    <option value="PAK">PAK</option>
+                                    <option value="PRF">PRF</option>
+                                    <option value="TOW">TOW</option>
+                                    <option value="SLB">SLB</option>
+                                    <option value="SLZ">SLZ</option>
+                                </select>
+                            <select id="Lokacja" class="form-select my-2" aria-label="Default select example">
+                                    <option selected>Wybierz magazyn</option>
+                                    <option value="HU">Hurtownia</option>
+                                    <option value="JG">Jagiellońska</option>
+                                    <option value="GR">Grunwaldzka</option>
+                                    <option value="SR">Serwis</option>
+                                    <option value="BR">Brodnica</option>
+                                    <option value="MB">Mobilny</option>
+                                    <option value="LU">Lubawa</option>
+                                    <option value="IN">Internet</option>
+                                </select>
+                            <input id="Lokacja2" class="form-control my-2" type="text" aria-label="default input example">
+                        </div>
+                        <div class="modal-footer">
+                            <button id="przycisk6" type="button" class="btn btn-secondary invisible" data-bs-dismiss="modal">Zamknij</button>
+                            <button type="button" class="btn btn-primary disabled" id="przycisk3">Zapisz ustawienia</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop1" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel1" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel1">Wpisz kod kreskowy</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input id="KodKreskowy" class="form-control my-2" type="text" aria-label="default input example" inputmode="decimal" autocomplete="off">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary kod_kreskowy" data-bs-dismiss="modal">Zapisz kod kreskowy</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop0" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel0" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel0">Podaj ilość</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input id="Ilosc_spisana" class="form-control my-2" type="text" aria-label="default input example" inputmode="decimal">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary podaj_ilosc" data-bs-dismiss="modal">Zapisz</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
+            <div class="modal fade" id="staticBackdrop3" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel3" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="staticBackdropLabel3">Podaj nową ilość</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <input id="Ilosc_poprawiana" class="form-control my-2" type="text" aria-label="default input example" inputmode="decimal" autocomplete="off">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-primary popraw_ilosc" data-bs-dismiss="modal">Zapisz</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Pole zapisu ustawień -->
+        <div class="text-center mx-3 mt-1">
+            <p id='ustawienia'>Tu pojawią sie ustawienia arkusza</p>
+        </div>
+        <!-- Okno spisanych zapasów -->
+        <div id="id_spisane" style="height: 250px" class="text-center overflow-auto border border-warning border-4 mx-3 my-1 rounded-2">
+            <table id="spisane" class="table bordered table-responsive">
+                <tr>
+                    <th>Kod</th>
+                    <th>Jednostka</th>
+                    <th>Nazwa</th>
+                    <th>EAN</th>
+                    <th>Ilość spisana</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <button id="przycisk2" type="button" class="btn btn-primary">POLICZ</button>
+    <button id="przycisk10" type="button" class="btn btn-primary">P1</button>
+    <!-- Option 1: Bootstrap Bundle with Popper -->
+    <script src="js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="js/axios.min.js"></script>
+    <script src="js/script_t.js"></script>
+</body>
+
+</html>
