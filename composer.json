@@ -1,0 +1,6 @@
+{
+    "require": {
+        "slim/slim": "3.*",
+        "selective/basepath": "^2.1"
+    }
+}
