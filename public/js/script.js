@@ -258,7 +258,9 @@ $("#search_text").keyup(function() {
             var dl = search.length;
             if ((dl >= 5) && (dl <= 7)) {
                 //alert(search);
-                load_data_zapas(search);
+                var search2 = search.padStart(7,0);
+                console.log(search2);
+                load_data_zapas(search2);
             } else {
                 if (dl >= 13) {
                     //alert(search);
